@@ -1,0 +1,23 @@
+{
+    "testScriptsConstants":{
+        "claimNumber": "705961",
+        "renterEmail":"SP1@GMAIL.COM",
+        "invalidClaimNumber":"897365",
+        "invalidEmail":"test9000@gmail.com",
+        "purcoStagingUrl":"https://staging-purco-cms.herokuapp.com/auth/sign-in?callbackUrl=https%3A%2F%2Fstaging-purco-cms.herokuapp.com%2Fclaims",
+        "renterClaimUrl": "https://staging-purco-cms.herokuapp.com/claims/705961/overview",
+        "createClaimEndpoint": "https://staging-purco-cms.herokuapp.com/api/trpc/claims.create",
+        "involvePartiUpdateEndpoint": "https://staging-purco-cms.herokuapp.com/api/trpc/involvedParties.update",
+        "cardNumber":"4242424242424242",
+        "expCardDate":"12/29",
+        "cvcNumber":"123",
+        "invalidcardNumber": "4000000000009995",
+        "customAmount": "500",
+        "authToken": "__Secure-next-auth.session-token=eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..lgTvnK5VokwkVwWI.xy05PhwNDtUtZl9qQ1a9dwL9PYP2z4-dwlX3qLvEPZEtR8P34r5Icot1XmYIcEL-gvZnz6taqqKoyALFnR8kBgysDZPm-AYBNdRnBTjYR-HYj6ZlGpbpGCCm9LiaemifhblCNqSnvH24XoLMEnbVa25gesTJF9pHgDCivRhYB72B3oXEVBWAKnJpa3Ea7ApmscAL-5WT0lN37yFawXRVknhUAgewjQ-NKIAfd0exNu11Gr4sOu5_RsojXpuSpjjSpSBncDB6zO-vBH0n3cAWnaAXrWW4muKlbN4K-588k1NpZxGOFyEeDRBvCkqHM5GUYiX9huYYGdzNkNskv8KarqoXV1e4N57FHnnnCVtvnYtw7Jfa9iCTOqc26NBw-nczUevC0aVJtwyXjM8Sq_rdBHRtFC-etLLrRSpiDy4lZ0neLmMOIp1HDUl5105zujYG3NsTNf9Fc-bESOO1WyDH6jfG8Y_TWkwozTDcX-1zEvOqlGH9p9tE6SDh0SD_omlykvJXqa2mP9nzQREfFbNOf-A6gx10gR0DkVPdEoCxCVxkvP5ajHz_SvZgSNBJlz_Ce1aFGkSXiiwNMW8AW486v-WQog5oMeydO_YX8wjBFQPhd2AJiwyytN9O0HKhthZfWNjRHLrJrFNmUv-6o58rolePZZnlxp2_yDIe2aAN_20jJw5-zGJnfRGxhhzmIbTIyD4VmC_YGEcCQUk1231Sr5iI6prhUPXZssIOwYJ7MGhcslYzsgXqNoEN-76JEXTOIIghcPK6ZYm8HTxisjsYQAgvS03WwQcQ-519aAV034SaIvwTrMNZaQjNNd6dC5k0_pdH5N6GC8c52Dtbgstr4OS1E2SF3ngEoF35LuUJMia6RqOOc56Lu0p48VltUg3DZSamA3NP4Gbu5XIclqGY3Op_lHu0iUvGU4D9hHghnMPpsH8K6ZfktSBwvH3kuqenC464JjVrW1k_j9cdL2RwQh4A9tSX8cdM6wQvBfHs37PiKiqibvM2yzInpbbw9UUbtW3JDPZwyUgjsXc52IWJ-LnGLnxg19E.G1qVT7RQ6vQDLLNZuF8YeA"
+
+    },
+    "timeoutConstants":{
+        "timeOuts":"3000"
+    }
+
+}

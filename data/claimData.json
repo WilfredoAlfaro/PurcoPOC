@@ -1,0 +1,51 @@
+{
+    "json": {
+      "hasResponsibleParty": true,
+      "dateReceived": "2024-06-24T17:49:57.496Z",
+      "ldwId": "",
+      "files": [],
+      "vin": "",
+      "renterFirstName": "Cole",
+      "renterLastName": "Palmer",
+      "rentalAgreement": "Testing12",
+      "renterAddress1": "16 ST",
+      "renterAddress2": "APT 5",
+      "renterCountry": "United States",
+      "renterProvince": "California",
+      "clientClaimNumber": "ccn20",
+      "renterCity": "Testing City",
+      "renterEmail": "cp@gmail.com",
+      "renterPhone": "123123123123",
+      "renterPhoneExtension": "567",
+      "renterPostalCode": "123123",
+      "clientLocationId": "a36f448e-059a-4295-9722-dbf979c2615c",
+      "damageDescription": "Test",
+      "story": "Test",
+      "vehicleNumber": "",
+      "year": "1935",
+      "make": "12832429 CANADA INC.",
+      "model": null,
+      "missingFiles": [],
+      "dateCompleted": null,
+      "renterAddressType": null,
+      "dateOfLoss": "2024-06-24T06:00:00.000Z",
+      "clientContactId": "4e6343db-5435-48dc-9a82-0efe071b19d9",
+      "physicalDamageAmount": 1500,
+      "louDailyRate": 200,
+      "louRepairHours": 3,
+      "louTotalDays": 0,
+      "louAmount": 0,
+      "administrativeFeeAmount": 500,
+      "organizationId": "27889e86-0e2f-4e66-a9aa-8fffe2410c34"
+    },
+    "meta": {
+      "values": {
+        "dateReceived": [
+          "Date"
+        ],
+        "dateOfLoss": [
+          "Date"
+        ]
+      }
+    }
+  }
