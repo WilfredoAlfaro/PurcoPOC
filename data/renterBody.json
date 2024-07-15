@@ -1,0 +1,60 @@
+{
+  "json": {
+    "id": "9582cc51-8be4-47ef-852f-2d2968981a9d",
+    "organizationId": null,
+    "isResponsible": true,
+    "organizationClaimNumber": "",
+    "organizationName": "",
+    "organizationLine1": "",
+    "organizationLine2": "",
+    "organizationCity": "",
+    "organizationProvince": "",
+    "organizationCountry": "",
+    "organizationPostalCode": "",
+    "organizationPhone": "",
+    "organizationPhoneExtension": "",
+    "firstName": "Marc",
+    "lastName": "Bogan",
+    "primaryPhone": "123123123123",
+    "primaryPhoneExtension": "567",
+    "secondaryPhone": "",
+    "secondaryPhoneExtension": "",
+    "addressesIdsToDelete": [],
+    "fax": "",
+    "hasSystemAccess": true,
+    "type": "RENTER",
+    "emailAddresses": [
+      "Walton_Jenkins@hotmail.com"
+    ],
+    "addresses": [
+      {
+        "id": "9582cc51-8be4-47ef-852f-2d2968981a9d",
+        "address1": "16 ST",
+        "address2": "APT 5",
+        "city": "Testing City",
+        "country": "United States",
+        "userId": null,
+        "organizationId": null,
+        "organizationLocationId": null,
+        "postalCode": "123123",
+        "province": "California",
+        "isUndeliverable": false,
+        "type": null,
+        "createdAt": "2024-07-05T20:46:44.410Z",
+        "updatedAt": "2024-07-05T20:46:44.410Z",
+        "deletedAt": null,
+        "involvedPartyId": "9582cc51-8be4-47ef-852f-2d2968981a9d"
+      }
+    ]
+  },
+  "meta": {
+    "values": {
+      "addresses.0.createdAt": [
+        "Date"
+      ],
+      "addresses.0.updatedAt": [
+        "Date"
+      ]
+    }
+  }
+}

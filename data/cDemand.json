@@ -1,0 +1,62 @@
+{
+    "json": {
+        "claimDemandId": " ",
+        "status": "DRAFT",
+        "items": [
+            {
+                "claimDemandLineItemId": " ",
+                "applicableParties": [
+                    " "
+                ],
+                "amount": 15000,
+                "toClient": 15000,
+                "toPurCo": 0,
+                "toOther": 0,
+                "type": "PHYSICAL_DAMAGE",
+                "dailyRate": null,
+                "discount": null,
+                "totalDays": 0,
+                "repairHours": 0
+            },
+            {
+                "claimDemandLineItemId": " ",
+                "applicableParties": [
+                    " "
+                ],
+                "amount": 3058,
+                "toClient": 1529,
+                "toPurCo": 1529,
+                "toOther": 0,
+                "type": "LOSS_OF_USE",
+                "dailyRate": 278,
+                "discount": null,
+                "totalDays": 11,
+                "repairHours": 24
+            },
+            {
+                "claimDemandLineItemId": " ",
+                "applicableParties": [
+                    " "
+                ],
+                "amount": 5000,
+                "toClient": 0,
+                "toPurCo": 5000,
+                "toOther": 0,
+                "type": "ADMINISTRATIVE_FEE",
+                "dailyRate": null,
+                "discount": null,
+                "totalDays": 0,
+                "repairHours": 0
+            }
+        ],
+        "updateReasonDescription": "",
+        "updateReasonType": "null"
+    },
+    "meta": {
+        "values": {
+            "updateReasonType": [
+                "undefined"
+            ]
+        }
+    }
+}
