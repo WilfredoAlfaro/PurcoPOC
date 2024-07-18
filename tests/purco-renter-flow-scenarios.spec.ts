@@ -1,8 +1,8 @@
-import { test } from '../helpers/claimCreation.api.fixtures';
-import RenterLogin from '../page-objects/login.page';
-import constants from '../../data/constants.json';
-import RenterClaimOverview from '../page-objects/homepage.renter.page';
-import PaymentRenter from '../page-objects/paymentpage.renter.page';
+import { test } from '../src/helpers/claimCreation.api.fixtures';
+import RenterLogin from '../src/page-objects/login.page';
+import constants from '../src/data/constants.json';
+import RenterClaimOverview from '../src/page-objects/homepage.renter.page';
+import PaymentRenter from '../src/page-objects/paymentpage.renter.page';
 
 test.describe('Purco_Renter_Login_Page_Scenarios: Negative', () => {
     test.beforeEach(async ({ setupApiFunction }) => {
@@ -70,8 +70,6 @@ test.describe('Purco_Renter_Login_Page_Scenarios: POSITIVE', () => {
         await page.close();
     });
 });
-
-
 
 test.describe('Purco_Renter_Payment_Page_Scenarios: POSITIVE', () => {
 

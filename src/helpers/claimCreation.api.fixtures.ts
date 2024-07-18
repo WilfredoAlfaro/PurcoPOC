@@ -1,6 +1,6 @@
 import { test as base, Page } from '@playwright/test'
 import ApiFunctions from './apiFunctions.DataRequest'
-import constants from '../../data/constants.json';
+import constants from '../data/constants.json';
 
 const claimCreationEndpoint = constants.testScriptsConstants.createClaimEndpoint;
 const updateCdemandEndpoint = constants.testScriptsConstants.UpdateClaimDemanEndpoint;

@@ -1,0 +1,28 @@
+{
+    "testScriptsConstants":{
+        "claimNumber": "706004",
+        "claimId":"",
+        "phisicalDamage": " ",
+        "lossOfUse": " ",
+        "adminFee": " ",
+        "involvedPartieId": " ",
+        "renterEmail":"claim",
+        "invalidClaimNumber":"897365",
+        "invalidEmail":"test9000@gmail.com",
+        "purcoStagingUrl":"https://staging-purco-cms.herokuapp.com/auth/sign-in?callbackUrl=https%3A%2F%2Fstaging-purco-cms.herokuapp.com%2Fclaims",
+        "renterClaimUrl": "https://staging-purco-cms.herokuapp.com/claims/706004/overview",
+        "createClaimEndpoint": "https://staging-purco-cms.herokuapp.com/api/trpc/claims.create",
+        "involvePartiUpdateEndpoint": "https://staging-purco-cms.herokuapp.com/api/trpc/involvedParties.update",
+        "UpdateClaimDemanEndpoint": "https://staging-purco-cms.herokuapp.com/api/trpc/claimDemands.update",
+        "deleteclaimEndpoint": "https://staging-purco-cms.herokuapp.com/api/trpc/claims.delete",
+        "cardNumber":"4242424242424242",
+        "expCardDate":"12/29",
+        "cvcNumber":"123",
+        "invalidcardNumber": "4000000000009995",
+        "customAmount": "500"
+    },
+    "timeoutConstants":{
+        "timeOuts":"3000"
+    }
+
+}
