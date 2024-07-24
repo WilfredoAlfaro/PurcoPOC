@@ -39,10 +39,11 @@ class ApiFunctions {
     }
   }
 
+
   /**
-   * @function claimCreationPostRequest API post request to create a new claim
+   * @function updateData Updates claim creation json and renters body json
    */
-  async claimCreationPostRequest(url: string): Promise<any> {
+  updateData() {
     try {
       // Path to the JSON file
       const claimDataPath = path.join(__dirname, '../data/claimData.json');
@@ -61,7 +62,17 @@ class ApiFunctions {
       // Write the updated claim Data and renters Data object to the JSON file
       fs.writeFileSync(claimDataPath, JSON.stringify(claimData, null, 2));
       fs.writeFileSync(renterBodyPath, JSON.stringify(renterBody, null, 2));
+    } catch (error: any) {
+      throw error;
+    }
+  }
 
+  /**
+   * @function claimCreationPostRequest API post request to create a new claim
+   */
+  async claimCreationPostRequest(url: string): Promise<any> {
+    try {
+      this.updateData();
       //Post request 
       const response: APIResponse = await this.request.post(url, {
         headers: this.getHeaders(),
@@ -88,8 +99,6 @@ class ApiFunctions {
       constants.testScriptsConstants.renterClaimUrl = `https://staging-purco-cms.herokuapp.com/claims/${encodeURIComponent(responseData.result.data.json.claimNumber)}/overview`;
 
     } catch (error: any) {
-      console.error(`POST request failed: ${error.message}`);
-      console.error('Error details:', error);
       throw error; // Rethrow the error after logging it
     }
   }
@@ -101,6 +110,8 @@ class ApiFunctions {
     try {
       const claimId = constants.testScriptsConstants.claimId;
       const url = `https://staging-purco-cms.herokuapp.com/api/trpc/involvedParties.list?input=%7B%22json%22%3A%7B%22claimId%22%3A%22${encodeURIComponent(claimId)}%22%7D%7D`;
+      
+      //GET request
       const response = await this.request.get(url, {
         headers: this.getHeaders(),
       });
@@ -110,13 +121,9 @@ class ApiFunctions {
       if (response.status() !== 200) {
         throw new Error(`GET request failed with status ${response.status()}`);
       }
-
       //Update involve partie Id on the constants file
       constants.testScriptsConstants.involvedPartieId = responseData.result.data.json[0].id;
-
     } catch (error: any) {
-      console.error(`GET request failed: ${error.message}`);
-      console.error('Error details:', error);
       throw error; // Rethrow the error after logging it
     }
   }
@@ -132,7 +139,6 @@ class ApiFunctions {
       //Get request 
       const response = await this.request.get(url, { headers: this.getHeaders() });
       const responseData = await response.json();
-
       const claimDemands = responseData.result.data.json.claimDemands;
 
       // Update cDemand with the retrieved claim id 
@@ -154,8 +160,6 @@ class ApiFunctions {
         throw new Error("InvolvedPartieId is not defined!");
       }
     } catch (error: any) {
-      console.error(`GET request failed: ${error.message}`);
-      console.error('Error details:', error);
       throw error; // Rethrow the error after logging it
     }
   }
@@ -176,8 +180,6 @@ class ApiFunctions {
         throw new Error(`POST request failed with status ${response.status()}`);
       }
     } catch (error: any) {
-      console.error(`GET request failed: ${error.message}`);
-      console.error('Error details:', error);
       throw error; // Rethrow the error after logging it
     }
   }
@@ -203,8 +205,6 @@ class ApiFunctions {
         throw new Error(`POST request failed with status ${response.status()}`);
       }
     } catch (error: any) {
-      console.error(`GET request failed: ${error.message}`);
-      console.error('Error details:', error);
       throw error; // Rethrow the error after logging it
     }
   }
@@ -219,6 +219,7 @@ class ApiFunctions {
       renterBody.json.id = involvePartieId;
       renterBody.json.addresses[0].id = involvePartieId;
       renterBody.json.addresses[0].involvedPartyId = involvePartieId;
+
       //POST request
       const response = await this.request.post(url, {
         headers: this.getHeaders(),
@@ -229,8 +230,6 @@ class ApiFunctions {
         throw new Error(`POST request failed with status ${response.status()}`);
       }
     } catch (error: any) {
-      console.error(`POST request failed: ${error.message}`);
-      console.error('Error details:', error);
       throw error; // Rethrow the error after logging it
     }
   }
@@ -254,8 +253,6 @@ class ApiFunctions {
         throw new Error(`POST request failed with status ${response.status()}`);
       }
     } catch (error: any) {
-      console.error(`POST request failed: ${error.message}`);
-      console.error('Error details:', error);
       throw error; // Rethrow the error after logging it
     }
   }

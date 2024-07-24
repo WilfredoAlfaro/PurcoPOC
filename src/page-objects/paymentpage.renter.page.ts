@@ -43,88 +43,155 @@ class PaymentRenter{
 
     //Payment screen functions
     //Function to select full amount radio button
-    async fullAmountSelection(): Promise<void>{
-        await expect(this.radioFullAmountButton).toBeVisible();
-        if(await this.radioFullAmountButton.isChecked() != true){
-            await this.radioFullAmountButton.check();
+    async fullAmountSelection(): Promise<void> {
+        try {
+            await expect(this.radioFullAmountButton).toBeVisible();
+            if (await this.radioFullAmountButton.isChecked() != true) {
+                await this.radioFullAmountButton.check();
+            }
+        } catch (error: any) {
+            error.message = `Test failed, can't select full payment amount option - ${error.message}`;
+            throw error;
         }
-    
+
     }
 
     //Function to select the customa amount radio button
-    async customAmountSelections(): Promise<void>{
-        await expect(this.radioCustomAmountButton).toBeVisible();
-        await this.radioCustomAmountButton.check();
+    async customAmountSelections(): Promise<void> {
+        try {
+            await expect(this.radioCustomAmountButton).toBeVisible();
+            await this.radioCustomAmountButton.check();
+        } catch (error: any) {
+            error.message = `Test failed, can't select custom payment amount option - ${error.message}`;
+            throw error;
+        }
     }
 
     //Function to click on the next step button should move to payment information screen
-    async nextStepClick(): Promise<void>{
-        await expect(this.nextStepButton).toBeVisible();
-        await this.nextStepButton.click();
+    async nextStepClick(): Promise<void> {
+        try {
+            await expect(this.nextStepButton).toBeVisible();
+            await this.nextStepButton.click();
+        } catch (error: any) {
+            error.message = `Test failed, issue with the next step button - ${error.message}`;
+            throw error;
+        }
     } 
 
     //Function to click on the cancel button on the amount selection screen
-    async cancelButtonClick(): Promise<void>{
-        await expect(this.cancelButton).toBeVisible();
-        await this.cancelButton.click();
+    async cancelButtonClick(): Promise<void> {
+        try {
+            await expect(this.cancelButton).toBeVisible();
+            await this.cancelButton.click();
+        } catch (error: any) {
+            error.message = `Test failed, issue with the cancel payment button - ${error.message}`;
+            throw error;
+        }
     }
 
     //Function to select the card option on the payment information screen
-    async cardOptionSelection(): Promise<void>{
-        await expect(this.crecidtCardButton).toBeVisible();
-        await this.crecidtCardButton.click();
+    async cardOptionSelection(): Promise<void> {
+        try {
+            await expect(this.crecidtCardButton).toBeVisible();
+            await this.crecidtCardButton.click();
+        } catch (error: any) {
+            error.message = `Test failed, issue selecting credit card - ${error.message}`;
+            throw error;
+        }
     }
 
     //Function to  add card information to the input    
-    async addCardInformation(card : string ): Promise<void>{
-        await expect(this.cardNumberInput).toBeVisible();
-        await this.cardNumberInput.fill(card);
+    async addCardInformation(card: string): Promise<void> {
+        try {
+            await expect(this.cardNumberInput).toBeVisible();
+            await this.cardNumberInput.fill(card);
+        } catch (error: any) {
+            error.message = `Test failed, issue adding credit card number - ${error.message}`;
+            throw error;
+        }
     }
 
     //Function to  add card date to the input
-    async addDateCardInformation(cardDate : string ): Promise<void>{
-        await expect(this.expDateInput).toBeVisible();
-        await this.expDateInput.fill(cardDate);
+    async addDateCardInformation(cardDate: string): Promise<void> {
+        try {
+            await expect(this.expDateInput).toBeVisible();
+            await this.expDateInput.fill(cardDate);
+        } catch (error: any) {
+            error.message = `Test failed, issue adding credit card date - ${error.message}`;
+            throw error;
+        }
     }
 
     //Function to add the cvc number of the card to the input
-    async addCvcnumber(cvc : string): Promise<void>{
-        await expect(this.cvcInput).toBeVisible();
-        await this.cvcInput.fill(cvc);
+    async addCvcnumber(cvc: string): Promise<void> {
+        try {
+            await expect(this.cvcInput).toBeVisible();
+            await this.cvcInput.fill(cvc);
+        } catch (error: any) {
+            error.message = `Test failed, issue adding credit card cvc - ${error.message}`;
+            throw error;
+        }
 
     }
 
     //Function to bank account selection option
-    async bankOptionSelection(): Promise<void>{
-       await expect(this.bankAccountButton).toBeVisible();
-       await this.bankAccountButton.click();
-     }
+    async bankOptionSelection(): Promise<void> {
+        try {
+            await expect(this.bankAccountButton).toBeVisible();
+            await this.bankAccountButton.click();
+        } catch (error: any) {
+            error.message = `Test failed, issue select a bank account option for payment - ${error.message}`;
+            throw error;
+        }
+    }
 
      //Function to click on the confirmation payment button
      async confirmPaymentClick(): Promise<void>{
         await expect(this.confirmAndPayButton).toBeVisible();
         await this.confirmAndPayButton.click();
+        try{
+            
+        }catch(error: any){
+            error.message = `Test failed, login button not clickable - ${error.message}`;
+            throw error;
+        }
      }
 
      //Function to click on the button to go back to the claim overview screen
      async backToClaimOverview(): Promise<void>{
         await expect(this.backToClaimButton).toBeVisible();
         await this.backToClaimButton.click();
+        try{
+            
+        }catch(error: any){
+            error.message = `Test failed, login button not clickable - ${error.message}`;
+            throw error;
+        }
      }
 
-     //Function to validate the result label after the payment is made, it should equal to 'Succeeded' if the payment is process correctly
-     async paymentResultValidation(): Promise<void>{
-        await expect(this.paymentConfirmation).toBeVisible();
-        expect(await this.paymentConfirmation.textContent()).toEqual('Succeeded');
-     }
+    //Function to validate the result label after the payment is made, it should equal to 'Succeeded' if the payment is process correctly
+    async isPaymentConfirmationValid(): Promise<void> {
+        try {
+            await expect(this.paymentConfirmation).toBeVisible();
+            expect(await this.paymentConfirmation.textContent()).toEqual('Succeeded');
+        } catch (error: any) {
+            error.message = `Test failed, login button not clickable - ${error.message}`;
+            throw error;
+        }
+    }
 
-     ////Function to add a custom amout to pay when custom amount is selected
-     async addCustomAmount(amount : string): Promise<void>{
-        await expect(this.amountinput).toBeVisible()
-        await expect(this.amountinput).toBeEnabled()
-        await this.amountinput.clear();
-        await this.amountinput.fill(amount);
-     }
+    ////Function to add a custom amout to pay when custom amount is selected
+    async addCustomAmount(amount: string): Promise<void> {
+        try {
+            await expect(this.amountinput).toBeVisible()
+            await expect(this.amountinput).toBeEnabled()
+            await this.amountinput.clear();
+            await this.amountinput.fill(amount);
+        } catch (error: any) {
+            error.message = `Test failed, Issue adding a custom payment amount - ${error.message}`;
+            throw error;
+        }
+    }
     
 }
 export default PaymentRenter

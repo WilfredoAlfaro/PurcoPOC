@@ -13,6 +13,7 @@ cp .env.template .env
 2. Get the Cookie Token:
 Log in to the Purco app.
 Retrieve the session token from the response header.
+Make sure to retrive the key and the value from the token.
 
 3. Set the Cookie in the .env File:
 Open the .env file and set the COOKIE variable with the session token obtained in the previous step. Your .env file should look like this:

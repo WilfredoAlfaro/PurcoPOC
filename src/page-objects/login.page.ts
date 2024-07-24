@@ -1,5 +1,5 @@
 import{expect,type Locator, type Page} from '@playwright/test';
-import { takeScreenshot } from '../helpers/errorFunctions.ts';
+import {takeScreenshot} from '../helpers/errorFunctions';
 
 
 class RenterLogin{
@@ -35,11 +35,9 @@ class RenterLogin{
     try{
       await expect(this.signInButton).toBeVisible();
       await this.signInButton.click();
-    }catch(error){
-      console.error('Test failed:', error);
-            // Take a screenshot if the test fails
-            await takeScreenshot(this.page, 'Login button');
-            throw error; // Re-throw the error to ensure the test fails
+    }catch(error: any){
+        error.message = `Test failed, login button not clickable - ${error.message}`;
+        throw error;
     }
     
    }
@@ -48,118 +46,87 @@ class RenterLogin{
     try{
       await expect(this.emailInput).toBeVisible();
       await this.emailInput.fill(username);
-    }catch(error){
-      console.error('Test failed:', error);
-            // Take a screenshot if the test fails
-            await takeScreenshot(this.page, 'Add renter email');
-            throw error; // Re-throw the error to ensure the test fails
+    }catch(error:any){
+      error.message = `Test failed, while adding email on renters input - ${error.message}`;
+      throw error;
     }
     
    }
 
-   async validateLogovisibility(): Promise<void>{
+   async isPurcoLogoVisible(): Promise<void>{
     try{
       await expect(this.purcoLogo).toBeVisible();
-    }catch(error){
-      console.error('Test failed:', error);
-            // Take a screenshot if the test fails
-            await takeScreenshot(this.page, 'purco logo');
-            throw error; // Re-throw the error to ensure the test fails
+    }catch(error:any){
+      error.message = `Test failed, Purco logo is not visible - ${error.message}`;
+        throw error;
     }
    }
 
-   async validateLoginLabel(): Promise<void>{
+   async isLoginLabelValid(): Promise<void>{
      try{
       await expect(this.signInLabel).toBeVisible();
       expect(await this.signInLabel.textContent()).toEqual('Sign in to PurCo');
-     }catch(error){
-      console.error('Test failed:', error);
-      // Take a screenshot if the test fails
-      await takeScreenshot(this.page, 'Login Label');
-      throw error; // Re-throw the error to ensure the test fails
+     }catch(error:any){
+      error.message = `Test failed, Purco login label not visible or with invalid text - ${error.message}`;
+        throw error;
      }
    }
 
-   async validateNoEmailLabel(): Promise<void>{
-    await expect(this.noEmailLabel).toBeVisible();
-      expect(await this.noEmailLabel.textContent()).toEqual('Invalid email');
+   async isNoEmailLabelTextValid(): Promise<void>{
       try{
-
-      }catch(error){
-        console.error('Test failed:', error);
-            // Take a screenshot if the test fails
-            await takeScreenshot(this.page, 'purco logo');
-            throw error; // Re-throw the error to ensure the test fails
+        await expect(this.noEmailLabel).toBeVisible();
+        expect(await this.noEmailLabel.textContent()).toEqual('Invalid email');
+      }catch(error:any){
+        error.message = `Test failed, Purco no email label not visible or invalid text - ${error.message}`;
+          throw error;
       }
    }
 
    async navigatgetoLoginPage(): Promise<void>{
-    await this.page.goto(this.loginUrl);
-    try{
-
-    }catch(error){
-      console.error('Test failed:', error);
-            // Take a screenshot if the test fails
-            await takeScreenshot(this.page, 'purco logo');
-            throw error; // Re-throw the error to ensure the test fails
-    }
+      await this.page.goto(this.loginUrl);
    }
 
-   async validateInvalidEmailLabel(): Promise<void>{
-    await expect(this.invalidEmailLabel).toBeVisible();
-    expect(await this.invalidEmailLabel.textContent()).toEqual('We could not find an account with the provided information');
+   async isInvalidEmailLabelValid(): Promise<void>{
     try{
-
-    }catch(error){
+      await expect(this.invalidEmailLabel).toBeVisible();
+      expect(await this.invalidEmailLabel.textContent()).toEqual('We could not find an account with the provided information');
+    }catch(error:any){
+      error.message = `Test failed, login invalid email label not visible or invalid text - ${error.message}`;
+        throw error;
       
     }
    }
 
 
-   async validateClaimLabel(): Promise<void>{
+   async isClaimLabelValid(): Promise<void>{
     try{
       await expect(this.claimnNumberLabel).toBeVisible();
     expect(await this.claimnNumberLabel.textContent()).toEqual('Enter your PurCo Claim Number');
-    }catch(error){
-      console.error('Test failed:', error);
-            // Take a screenshot if the test fails
-            await takeScreenshot(this.page, 'Claim label');
-            throw error; // Re-throw the error to ensure the test fails
+    }catch(error:any){
+      error.message = `Test failed, login claim label is not visible or invalid text - ${error.message}`;
+        throw error;
     }
    }
 
    async addClaimNumber(claim : any): Promise<void>{
     try{
       await expect(this.claimNumberInput).toBeVisible();
-      console.log(claim);
       await this.claimNumberInput.fill(claim.toString());
-    }catch(error){
-      console.error('Test failed:', error);
-            // Take a screenshot if the test fails
-            await takeScreenshot(this.page, 'Add a claim input');
-            throw error; // Re-throw the error to ensure the test fails
+    }catch(error:any){
+      error.message = `Test failed, claim number input not visible  - ${error.message}`;
+        throw error;
     }
    }
 
    async clickClaimButton(): Promise<void>{
-    await expect(this.confirmClaimButton).toBeVisible();
-    await this.confirmClaimButton.click();
     try{
-
-    }catch(error){
-      console.error('Test failed:', error);
-            // Take a screenshot if the test fails
-            await takeScreenshot(this.page, 'Claim button');
-            throw error; // Re-throw the error to ensure the test fails
+      await expect(this.confirmClaimButton).toBeVisible();
+      await this.confirmClaimButton.click();
+    }catch(error:any){
+      error.message = `Test failed, login claim button not visible - ${error.message}`;
+        throw error;
     }
    }
-
-
-
-
-
-
-
 
 }
 

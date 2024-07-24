@@ -1,6 +1,6 @@
 {
   "json": {
-    "id": "99c8b5b4-c3be-4808-8bba-b3cc19f6cf24",
+    "id": "56c357e7-ff43-4b4c-adc4-db1b28d04cb8",
     "organizationId": null,
     "isResponsible": true,
     "organizationClaimNumber": "",
@@ -13,8 +13,8 @@
     "organizationPostalCode": "",
     "organizationPhone": "",
     "organizationPhoneExtension": "",
-    "firstName": "Julianne",
-    "lastName": "Greenholt",
+    "firstName": "Roma",
+    "lastName": "McDermott",
     "primaryPhone": "123123123123",
     "primaryPhoneExtension": "567",
     "secondaryPhone": "",
@@ -24,11 +24,11 @@
     "hasSystemAccess": true,
     "type": "RENTER",
     "emailAddresses": [
-      "Eda.Schowalter@gmail.com"
+      "Orval_Robel99@hotmail.com"
     ],
     "addresses": [
       {
-        "id": "99c8b5b4-c3be-4808-8bba-b3cc19f6cf24",
+        "id": "56c357e7-ff43-4b4c-adc4-db1b28d04cb8",
         "address1": "16 ST",
         "address2": "APT 5",
         "city": "Testing City",
@@ -43,7 +43,7 @@
         "createdAt": "2024-07-05T20:46:44.410Z",
         "updatedAt": "2024-07-05T20:46:44.410Z",
         "deletedAt": null,
-        "involvedPartyId": "99c8b5b4-c3be-4808-8bba-b3cc19f6cf24"
+        "involvedPartyId": "56c357e7-ff43-4b4c-adc4-db1b28d04cb8"
       }
     ]
   },
