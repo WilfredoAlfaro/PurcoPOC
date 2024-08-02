@@ -1,4 +1,4 @@
-import { APIRequestContext, APIResponse, expect } from '@playwright/test'
+import { APIRequestContext, APIResponse } from '@playwright/test'
 import { faker } from '@faker-js/faker';
 import fs from 'fs';
 import claimData from '../data/claimData.json';
@@ -11,8 +11,10 @@ dotenv.config();
 
 
 
+
 class ApiFunctions {
   readonly request: APIRequestContext;
+  
 
   constructor(request: APIRequestContext) {
     this.request = request;
@@ -33,6 +35,23 @@ class ApiFunctions {
         throw new Error('Cookie token error');
       }
       headers['Cookie'] = cookie;
+      return headers;
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  /**
+   * @function usersHeaders Request header for all API request 
+   * @returns Headers for API request
+   */
+  usersHeaders(userToken: string) {
+    try {
+      const headers: { [key: string]: string } = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'X-MailboxToken': userToken
+      };
       return headers;
     } catch (error: any) {
       throw error;
@@ -256,6 +275,114 @@ class ApiFunctions {
       throw error; // Rethrow the error after logging it
     }
   }
+
+  /**
+   * @function listEmailsReq Requesto for login to user
+   * @returns String with the user code
+   */
+
+  async listEmailsReq(emailName: string, userToken: string, emailId: string): Promise<string> {
+    const url = `https://www.developermail.com/api/v1/mailbox/${encodeURIComponent(emailName)}/messages/${encodeURIComponent(emailId)}`;
+    let userCode: string;
+    try {
+      const response = await this.request.get(url, {
+        headers: this.usersHeaders(userToken),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      const result = responseData.result as string;
+      // Find the start of the email body
+      const bodyStartIndex = result.indexOf("\r\n\r\n") + 4;
+      const emailBody = result.substring(bodyStartIndex);
+      // Regular expression to match the specific <p> tag
+      const regex = /<p[^>]*>(.*?)<\/p>/;
+      const codeMatch = emailBody.match(regex);
+      if (codeMatch && codeMatch[1]) {
+        userCode = codeMatch[1];
+        console.log('Extracted Code:', userCode);
+        return userCode;
+      } else {
+        throw new Error('Code not found in the email body.');
+      }
+    } catch (error: any) {
+      throw Error('Error:', error);
+    }
+  }
+
+/**
+   * @function fetchEmailList makes a request to the user mailbox and 
+   * @returns String with the email id 
+   */
+
+  async fetchEmailList(emailName: string, userToken: string): Promise<string> {
+    const url = `https://www.developermail.com/api/v1/mailbox/${encodeURIComponent(emailName)}`;
+
+    try {
+      // Wait for a specified time before making the request (e.g., 10 seconds)
+      await new Promise(resolve => setTimeout(resolve, 10000));
+
+      // Fetch list of message IDs present in the mailbox
+      const response = await this.request.get(url, {
+        headers: this.usersHeaders(userToken),
+      });
+
+      const responseData = await response.json();
+
+      // Check if result is present and is an array
+      const result = responseData.result;
+
+      if (!Array.isArray(result) || result.length !== 1) {
+        throw new Error("Expected exactly one email ID, but found none or multiple.");
+      }
+
+      // Return the only email ID in the result array
+      return result[0];
+    } catch (error: any) {
+      // Handle or rethrow the error as needed
+      throw new Error(`Failed to fetch email list: ${error.message}`);
+    }
+  }
+
+/**
+   * @function cleanMailBox makes a request to the user mailbox and removes the email id to always have 0 emails inside the mailbox
+   */
+  async cleanMailBox(emailName: string, userToken: string): Promise<void> {
+    const urlMailbox = `https://www.developermail.com/api/v1/mailbox/${encodeURIComponent(emailName)}`;
+
+    try {
+      // Fetch list of message IDs present in the mailbox
+      const mailBoxResponse = await this.request.get(urlMailbox, {
+        headers: this.usersHeaders(userToken),
+      });
+      const mailboxData = await mailBoxResponse.json();
+      const result = mailboxData.result;
+
+      if (!Array.isArray(result) || result.length === 0) {
+        throw new Error("No emails to delete.");
+      }
+      // Delete all messages in the mailbox
+      const deletionPromises = result.map(async (element: string) => {
+        const cleanMailboxUrl = `https://www.developermail.com/api/v1/mailbox/${encodeURIComponent(emailName)}/messages/${encodeURIComponent(element)}`;
+        try {
+          await this.request.delete(cleanMailboxUrl, {
+            headers: this.usersHeaders(userToken),
+          });
+        } catch (error: any) {
+          throw new Error(`Failed to delete email ID: ${element}`, error);
+        }
+      });
+
+      // Wait for all deletions to complete
+      await Promise.all(deletionPromises);
+    } catch (error: any) {
+      throw Error('Error:', error);
+
+    }
+  }
+
+
 
 }
 export default ApiFunctions

@@ -1,6 +1,7 @@
-import { test as base, Page } from '@playwright/test'
-import ApiFunctions from './apiFunctions.DataRequest'
+import { test as base, Page } from '@playwright/test';
+import ApiFunctions from './apiFunctions.DataRequest';
 import constants from '../data/constants.json';
+
 
 const claimCreationEndpoint = constants.testScriptsConstants.createClaimEndpoint;
 const updateCdemandEndpoint = constants.testScriptsConstants.UpdateClaimDemanEndpoint;
@@ -9,15 +10,19 @@ const deleteClaimEndpoint = constants.testScriptsConstants.deleteclaimEndpoint;
 
 type DataCreation = {
     page: Page;
+    apiFunction : ApiFunctions;
     setupApiFunction: () => Promise<void>;
     postTestFunction: () => Promise<void>;
+    userEmailfunction: (emailName: string, token: string) => Promise<string>;
+    cleanMailBox: (emailName: string, token: string) => Promise<void>;
 };
 
 const test = base.extend<DataCreation>({
-    setupApiFunction: async ({ request }, use) => {
+    apiFunction: async ({ request }, use) => {
         const apiFunction = new ApiFunctions(request);
-
-        //Perform setup actions in a setup function
+        await use(apiFunction);
+    },
+    setupApiFunction: async ({ apiFunction }, use) => {
         const setupFunction = async () => {
             await apiFunction.claimCreationPostRequest(claimCreationEndpoint);
             await apiFunction.claimInvolParGet();
@@ -27,20 +32,31 @@ const test = base.extend<DataCreation>({
             await apiFunction.giveSystemAccess(involvePartieEndpoint);
             console.log("Test Claim creation Function executed");
         };
-        // Provide the setup function to tests
         await use(setupFunction);
     },
-
-    postTestFunction: async ({ request }, use) => {
-        const apiFunction = new ApiFunctions(request);
-        // Function to remove the test data created for the test
+    postTestFunction: async ({ apiFunction }, use) => {
         const postTestFunction = async () => {
             await apiFunction.deleteClaim(deleteClaimEndpoint);
             console.log("Test data cleaner executed");
         };
-        // Provide the post-test function to tests
         await use(postTestFunction);
+    },
+    userEmailfunction: async ({ apiFunction }, use) => {
+        const userEmailfunction = async (emailName: string, token: string) =>  {
+            console.log("fixture email name " + emailName);
+            const emailId = await apiFunction.fetchEmailList(emailName,token);
+            const emailCode = await apiFunction.listEmailsReq(emailName,token,emailId);
+            return emailCode;
+        };
+        await use(userEmailfunction);
+    },
+    cleanMailBox: async ({apiFunction}, use) => {
+        const cleanMailBox = async (emailName: string, token: string) => {
+        await apiFunction.cleanMailBox(emailName,token);    
+    };
+    await use(cleanMailBox)
     }
+
 });
 
 export { test };

@@ -2,7 +2,7 @@ import{expect,type Locator, type Page} from '@playwright/test';
 import {takeScreenshot} from '../helpers/errorFunctions';
 
 
-class RenterLogin{
+class UserLogin{
     readonly page : Page
     readonly signInLabel : Locator;
     readonly purcoLogo : Locator;
@@ -14,6 +14,7 @@ class RenterLogin{
     readonly claimnNumberLabel: Locator;
     readonly claimNumberInput: Locator;
     readonly confirmClaimButton: Locator;
+    readonly userCode1 : Locator;
 
 
     constructor(page : Page){
@@ -28,6 +29,8 @@ class RenterLogin{
         this.claimnNumberLabel = page.getByText('Enter your PurCo Claim Number');
         this.claimNumberInput = page.getByPlaceholder('Claim #');
         this.confirmClaimButton = page.getByText('Confirm');
+        this.userCode1 = page.locator("//input[@id='mantine-r1']");
+
     }
 
     //Functions
@@ -128,6 +131,18 @@ class RenterLogin{
     }
    }
 
+
+   async fillinput(emailCode : string): Promise<void>{
+    try{
+      await expect(this.userCode1).toBeEditable();
+      await this.userCode1.fill(emailCode);
+    }catch(error:any){
+      error.message = `Test failed, user code error - ${error.message}`;
+        throw error;
+
+    }
+   }
+
 }
 
-export default RenterLogin
+export default UserLogin
