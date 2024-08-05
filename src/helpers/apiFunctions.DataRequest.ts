@@ -268,6 +268,7 @@ class ApiFunctions {
         }
       });
       //Validate the status code of the reponse
+      console.log("claim to be deleted " + constants.testScriptsConstants.claimId)
       if (response.status() !== 200) {
         throw new Error(`POST request failed with status ${response.status()}`);
       }

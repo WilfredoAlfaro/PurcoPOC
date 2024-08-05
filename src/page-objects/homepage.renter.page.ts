@@ -12,6 +12,10 @@ class RenterClaimOverview{
     readonly addNoteButton: Locator;
     readonly cancelButton: Locator;
     readonly newNote: Locator;
+    readonly addFileButton: Locator;
+    readonly addfilesModalButton: Locator;
+    readonly cancelFilebutton: Locator;
+    readonly dragAndDropFilesInput: Locator;
 
 
     constructor(page : Page){
@@ -23,7 +27,12 @@ class RenterClaimOverview{
         this.textNote = faker.lorem.paragraph();
         this.addNoteButton = page.getByText('Add Note');
         this.cancelButton = page.getByText('Cancel');
-        this.newNote = page.locator('//div[@class="mantine-Text-root css-1f6ey70 mantine-nrd89"]')
+        this.newNote = page.locator('//div[@class="mantine-Text-root css-1f6ey70 mantine-nrd89"]');
+        this.addFileButton = page.getByRole('button').filter({hasText:'Add File'});
+        this.addfilesModalButton = page.getByRole('button').filter({hasText:'Add File'});
+        this.cancelFilebutton = page.getByRole('button').filter({hasText:'Cancel'});
+        this.dragAndDropFilesInput = page.getByText('Drop file here or');
+
     }
 
     //Functions 
@@ -81,6 +90,7 @@ class RenterClaimOverview{
         }
     }
 
+    
 
 
 

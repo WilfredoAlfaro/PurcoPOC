@@ -1,8 +1,8 @@
-import { test } from '../src/helpers/dataCreation.api.fixtures';
-import UserLogin from '../src/page-objects/login.page';
-import constants from '../src/data/constants.json';
-import RenterClaimOverview from '../src/page-objects/homepage.renter.page';
-import PaymentRenter from '../src/page-objects/paymentpage.renter.page';
+import { test } from '../../src/helpers/dataCreation.api.fixtures';
+import UserLogin from '../../src/page-objects/login.page';
+import constants from '../../src/data/constants.json';
+import RenterClaimOverview from '../../src/page-objects/homepage.renter.page';
+import PaymentRenter from '../../src/page-objects/paymentpage.renter.page';
 
 test.describe('Purco_Renter_Login_Page_Scenarios: Negative', () => {
     test.beforeEach(async ({ setupApiFunction }) => {
@@ -32,6 +32,18 @@ test.describe('Purco_Renter_Login_Page_Scenarios: Negative', () => {
         await UserLoginPage.addRentersEmail(constants.testScriptsConstants.invalidEmail);
         await UserLoginPage.clickLoginButton();
         await UserLoginPage.isInvalidEmailLabelValid();
+        await page.close();
+    });
+
+    test('PUR-REN-NEG-002: SUBMIT INVALID RENTER CLAIM NUMBER @SmokeTest', async ({ page }) => {
+        const UserLoginPage = new UserLogin(page);
+        await UserLoginPage.navigatgetoLoginPage();
+        await UserLoginPage.isLoginLabelValid();
+        await UserLoginPage.isPurcoLogoVisible();
+        await UserLoginPage.addRentersEmail(constants.testScriptsConstants.renterEmail);
+        await UserLoginPage.clickLoginButton();
+        await UserLoginPage.addClaimNumber(constants.testScriptsConstants.invalidClaimNumber);
+        await UserLoginPage.clickClaimButton();
         await page.close();
     });
 
